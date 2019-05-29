@@ -40,5 +40,17 @@ return [
         'finder' => [
             'LibIpIpapi\\Library\\Finder' => 1000
         ]
+    ],
+    '__inject' => [
+        [
+            'name' => 'libIpIpapi',
+            'children' => [
+                [
+                    'name' => 'apikey',
+                    'question' => 'Please enter your premium ipapi.co APIKEY',
+                    'rule' => '!^.+$!'
+                ]
+            ]
+        ]
     ]
 ];
