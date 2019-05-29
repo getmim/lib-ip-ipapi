@@ -15,6 +15,8 @@ class Finder
 {
 
     static function find(string $ip): ?object {
+        if($ip === '127.0.0.1')
+            return null;
         $apikey = \Mim::$app->config->libIpIpapi->apikey;
 
         $url = 'https://ipapi.co/'.$ip.'/json/';
@@ -33,9 +35,9 @@ class Finder
         $result = Curl::fetch($opts);
         if(!$result || !is_object($result))
             return null;
-        if(isset($result->error))
+        if(isset($result->error) || isset($result->reserved))
             return null;
-
+        
         $continents = [
             'AF' => 'Africa',
             'AN' => 'Antarctica',
